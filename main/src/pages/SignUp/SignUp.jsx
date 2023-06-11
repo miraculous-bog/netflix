@@ -1,21 +1,30 @@
-
+import axios from "axios";
 import { useRef } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./signUp.scss";
-
 
 const SignUp = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [username, setUsername] = useState("");
+	const navigate = useNavigate();
 
 	const emailRef = useRef();
 	const passwordRef = useRef();
+	const usernameRef = useRef();
 
 	const handleStart = () => {
 		setEmail(emailRef.current.value);
 	};
-	const handleFinish = () => {
+	const handleFinish = async (e) => {
+		e.preventDefault();
 		setPassword(passwordRef.current.value);
+		setUsername(usernameRef.current.value);
+		try {
+			await axios.post("auth/register", { email, username, password });
+			navigate("/sign-in", { replace: true });
+		} catch (err) { }
 	};
 	return (
 		<div className="register">
@@ -44,6 +53,7 @@ const SignUp = () => {
 					</div>
 				) : (
 					<form className="input">
+						<input type="username" placeholder="username" ref={usernameRef} />
 						<input type="password" placeholder="password" ref={passwordRef} />
 						<button className="registerButton" onClick={handleFinish}>
 							Start
@@ -54,5 +64,4 @@ const SignUp = () => {
 		</div>
 	);
 }
-
 export default SignUp;

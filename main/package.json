@@ -54,5 +54,6 @@
   "devDependencies": {
     "@mui/types": "^7.2.4",
     "@types/node-sass": "^4.11.3"
-  }
+  },
+  "proxy": "http://localhost:8800/api/"
 }

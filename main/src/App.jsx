@@ -1,33 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import Video from './pages/Video/Video';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { AuthContext } from './authContext/AuthContext';
 
 function App() {
-  const user = true; // Assuming user is not authenticated
+  const user = useContext(AuthContext);
   const navigate = useNavigate();
-
+  console.log(user);
   return (
     <>
       <Routes>
         <Route
           path="/main"
           element={
-            user ? (
+            user.user ? (
               <Home />
             ) : (
-              () => navigate('/sign-in', { replace: true })
+              <Navigate to="/sign-in" replace />
             )
           }
         />
         <Route
-          path="/main/movies"
+          path="/main/movie"
           element={
             user ? (
-              <Home type='movies' />
+              <Home type='movie' />
             ) : (
-              () => navigate('/sign-in', { replace: true })
+              <Navigate to="/sign-in" replace />
             )
           }
         />
@@ -36,6 +38,16 @@ function App() {
           element={
             user ? (
               <Home type='series' />
+            ) : (
+              () => navigate('/sign-in', { replace: true })
+            )
+          }
+        />
+        <Route
+          path="/video/:link"
+          element={
+            user ? (
+              <Video />
             ) : (
               () => navigate('/sign-in', { replace: true })
             )
