@@ -3,14 +3,16 @@ import axios from "axios";
 import Navbar from "../../common/components/Navbar/Navbar";
 import Featured from "../../common/components/Featured/Featured";
 import List from "../../common/components/List/List";
+import Modal from "../../common/components/Modal/Modal";
+
 import "./home.scss"
 
 
 const Home = ({ type }) => {
 	const [lists, setLists] = useState([]);
 	const [genre, setGenre] = useState(null);
-	console.log(`lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`);
 
+	console.log(`lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`);
 	useEffect(() => {
 		const getRandomLists = async () => {
 			try {
@@ -24,7 +26,7 @@ const Home = ({ type }) => {
 				);
 				const result = await res.json();
 				console.log(result);
-				setLists(result); // Update this line
+				setLists(result);
 				console.log(result);
 			} catch (err) {
 				console.log(err);
@@ -36,11 +38,14 @@ const Home = ({ type }) => {
 
 	return (
 		<div className="home">
+			{type === 'listAdded' && <Modal />}
+			{type === 'listNew' && <Modal />}
 			<Navbar />
 			<Featured type={type} setGenre={setGenre} />
 			{lists && lists.map((list) => <List list={list} key={list.id} />)}
 		</div>
 	);
 };
+
 
 export default Home;

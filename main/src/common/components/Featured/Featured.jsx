@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InfoIcon from '@mui/icons-material/Info';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -7,7 +8,8 @@ import './featured.scss';
 
 const Featured = ({ type, setGenre }) => {
 	const [content, setContent] = useState({});
-
+	const navigate = useNavigate();
+	console.log("-----------------", content);
 	useEffect(() => {
 		const getRandomContent = async () => {
 			try {
@@ -53,17 +55,16 @@ const Featured = ({ type, setGenre }) => {
 			)}
 			<img src={content.img} alt="" />
 			<div className="info">
-				<img src={content.imgTitle} alt="" />
 				<span className="desc">{content.desc}</span>
 				<div className="buttons">
-					<button className="play">
+					<button className="play" onClick={() => navigate(`/video/${encodeURIComponent(content.video)}`)}>
 						<PlayArrowIcon />
 						<span>Play</span>
 					</button>
-					<button className="more">
+					{/* <button className="more">
 						<InfoIcon />
 						<span>Info</span>
-					</button>
+					</button> */}
 				</div>
 			</div>
 		</div>

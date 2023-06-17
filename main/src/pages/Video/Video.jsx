@@ -1,20 +1,18 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import "./video.scss";
+import styles from "./video.module.css";
 import { Link, useParams } from 'react-router-dom';
 
 const Video = () => {
-	const link = useParams();
-	console.log(link);
+	const { link } = useParams();
 	return (
-		<div className="watch">
+		<div className={styles.watch}>
 			<Link to="/main">
-				<div classsName="back">
+				<div className={styles.back}>
 					<ArrowBackIosNewIcon />
 					Home
 				</div>
 			</Link>
-			<video className="video" autoPlay={true} loop src={link.link} progress="true" controls />
-			{/* <video className="video" autoPlay controls src={movie} progress="true" /> */}
+			<video className={styles.video} autoPlay loop src={link} progress="true" controls />
 		</div>
 	);
 }

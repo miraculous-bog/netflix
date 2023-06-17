@@ -3,10 +3,12 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const authRoute = require("./routes/auth");
-const userRoute = require("./routes/users");
-const movieRoute = require("./routes/movies");
-const listRoute = require("./routes/lists");
+
+const authRoute = require('./routers/authRouter');
+const userRoute = require('./routers/userRouter');
+const movieRoute = require("./routers/movieRouter");
+const listRoute = require("./routers/listRouter");
+
 
 const corsOptions = {
   origin: 'http://localhost:8800',

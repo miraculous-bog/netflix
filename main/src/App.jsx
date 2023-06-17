@@ -24,6 +24,26 @@ function App() {
           }
         />
         <Route
+          path="/main/listAdded"
+          element={
+            user ? (
+              <Home type='listAdded' />
+            ) : (
+              <Navigate to="/sign-in" replace />
+            )
+          }
+        />
+        <Route
+          path="/main/listNew"
+          element={
+            user ? (
+              <Home type='listNew' />
+            ) : (
+              <Navigate to="/sign-in" replace />
+            )
+          }
+        />
+        <Route
           path="/main/movie"
           element={
             user ? (
